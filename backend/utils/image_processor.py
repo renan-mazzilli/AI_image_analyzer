@@ -54,7 +54,7 @@ class ImageProcessor:
                     'y': int(y),
                     'width': int(w),
                     'height': int(h),
-                    'confidence': 0.85  # OpenCV não retorna confidence, valor fixo
+                    'confidence': 0.85
                 })
             
             return {
@@ -74,7 +74,7 @@ class ImageProcessor:
             opencv_image = cv2.cvtColor(np.array(pil_image), cv2.COLOR_RGB2BGR)
             gray = cv2.cvtColor(opencv_image, cv2.COLOR_BGR2GRAY)
             
-            # Calcular nitidez (Laplacian variance)
+            # Calcular nitidez
             sharpness = cv2.Laplacian(gray, cv2.CV_64F).var()
             
             # Calcular brilho médio
@@ -107,10 +107,10 @@ class ImageProcessor:
     def _calculate_quality_score(self, sharpness, brightness, contrast, noise):
         """Calcula score de qualidade (0-100)"""
         # Normalizar métricas
-        sharpness_norm = min(sharpness / 1000, 1.0)  # Valores típicos 0-1000+
-        brightness_norm = 1.0 - abs(brightness - 127.5) / 127.5  # Ideal próximo a 127.5
-        contrast_norm = min(contrast / 70, 1.0)  # Valores típicos 0-70+
-        noise_norm = max(0, 1.0 - noise / 20)  # Menos ruído é melhor
+        sharpness_norm = min(sharpness / 1000, 1.0)  
+        brightness_norm = 1.0 - abs(brightness - 127.5) / 127.5  
+        contrast_norm = min(contrast / 70, 1.0)  
+        noise_norm = max(0, 1.0 - noise / 20)  
         
         # Pesos para cada métrica
         weights = {

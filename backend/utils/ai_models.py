@@ -125,21 +125,21 @@ class AIModelManager:
             brightness_sentiment = self._analyze_brightness_sentiment(image)
             classification_sentiment = self._get_classification_sentiment(image)
             
-            # Calcular score final com pesos ajustados
+            # Calcular score final
             sentiment_score = (
-                color_sentiment['score'] * 0.25 +           # Reduzido de 0.4
-                brightness_sentiment['score'] * 0.25 +      # Reduzido de 0.3
-                classification_sentiment['score'] * 0.5     # Aumentado de 0.3
+                color_sentiment['score'] * 0.25 +           
+                brightness_sentiment['score'] * 0.25 +      
+                classification_sentiment['score'] * 0.5
             )
             
-            # Determinar sentimento final com thresholds ajustados
+            # Determinar sentimento final
             if sentiment_score >= 0.5:
                 sentiment = "Muito Positivo"
-            elif sentiment_score >= 0.2:  # Reduzido de 0.3
+            elif sentiment_score >= 0.2:  
                 sentiment = "Positivo"
-            elif sentiment_score >= -0.2: # Reduzido de -0.3
+            elif sentiment_score >= -0.2: 
                 sentiment = "Neutro"
-            elif sentiment_score >= -0.5: # Reduzido de -0.6
+            elif sentiment_score >= -0.5: 
                 sentiment = "Negativo"
             else:
                 sentiment = "Muito Negativo"
@@ -185,7 +185,7 @@ class AIModelManager:
             
             # Converter para HSV para análise de saturação
             hsv_pixels = []
-            for pixel in pixels[::100]:  # Sample pixels
+            for pixel in pixels[::100]:
                 r, g, b = pixel / 255.0
                 h, s, v = colorsys.rgb_to_hsv(r, g, b)
                 hsv_pixels.append([h, s, v])
@@ -257,7 +257,7 @@ class AIModelManager:
             sentiment_score = 0.0
             notes = []
             
-            # Brilho ideal (não muito escuro, não muito claro)
+            # Brilho ideal
             if 80 <= brightness <= 180:
                 sentiment_score += 0.3
                 notes.append("Brilho balanceado")
@@ -302,7 +302,7 @@ class AIModelManager:
             sentiment_score = 0.0
             notes = []
             
-            # Mapeamento MELHORADO de classes para sentimentos
+            # Mapeamento de classes para sentimentos
             very_positive_keywords = [
                 'golden retriever', 'labrador', 'dog', 'puppy',
                 'flower', 'garden', 'beach', 'sunset', 'sunrise',
@@ -318,7 +318,7 @@ class AIModelManager:
                 'vacation', 'travel', 'adventure'
             ]
             
-            # NOVA CATEGORIA: Detectar pessoas felizes/ativas
+            # Detectar pessoas felizes/ativas
             active_positive_keywords = [
                 'sweatshirt', 'hoodie', 'jersey', 'sportswear',
                 'running', 'exercise', 'fitness', 'yoga',
@@ -338,7 +338,7 @@ class AIModelManager:
                 'desk', 'chair', 'table'
             ]
             
-            # NOVA LÓGICA: Combinar com análise de descrição
+            # Combinar com análise de descrição
             try:
                 description = self.generate_caption(image).lower()
                 logger.info(f"📝 Descrição para análise: {description}")
@@ -364,7 +364,7 @@ class AIModelManager:
             # Verificar indicadores de alegria
             for indicator in joy_indicators:
                 if indicator in description:
-                    description_boost += 0.8  # Forte boost para postura positiva
+                    description_boost += 0.8 
                     description_notes.append(f"Postura positiva detectada: {indicator}")
                     break
             
@@ -394,10 +394,10 @@ class AIModelManager:
                         if keyword in class_name:
                             # Para roupas esportivas, usar a descrição para determinar contexto
                             if description_boost > 0:
-                                classification_boost += 0.5  # Roupa esportiva + postura positiva
+                                classification_boost += 0.5 
                                 notes.append(f"Atividade positiva com {keyword}")
                             else:
-                                classification_boost += 0.1  # Apenas roupa esportiva
+                                classification_boost += 0.1  
                                 notes.append(f"Roupa casual/esportiva: {keyword}")
                             break
                     else:
