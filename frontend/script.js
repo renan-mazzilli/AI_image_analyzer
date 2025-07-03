@@ -1,6 +1,6 @@
 class AIImageAnalyzer {
     constructor() {
-        this.backendUrl = 'http://localhost:5000'; // ✅ ADICIONAR ESTA LINHA
+        this.backendUrl = 'http://localhost:5000';
         this.models = {
             mobilenet: null,
             cocoSsd: null
@@ -122,7 +122,7 @@ class AIImageAnalyzer {
         async runAnalysis(imgElement, resultsDiv) {
         const analyses = [];
 
-        // 🎯 NOVA: Classificação Inteligente (combina todos os modelos)
+        // Classificação Inteligente (combina todos os modelos)
         if (document.getElementById('smartClassification').checked) {
             const smartClassification = await this.getSmartClassification(imgElement);
             if (smartClassification.length > 0) {
@@ -174,7 +174,7 @@ class AIImageAnalyzer {
             console.log('🧠 Iniciando classificação inteligente...');
             const results = [];
             
-            // 🎯 Método 1: COCO-SSD (mais confiável para objetos principais)
+            // Método 1: COCO-SSD 
             if (this.models.cocoSsd) {
                 console.log('🔍 Analisando com COCO-SSD...');
                 const detections = await this.models.cocoSsd.detect(imgElement);
@@ -198,7 +198,7 @@ class AIImageAnalyzer {
                 console.log(`✅ COCO-SSD encontrou ${highConfidenceObjects.length} objetos`);
             }
             
-            // 🧠 Método 2: Backend ViT (para contexto e classificação refinada)
+            // Método 2: Backend ViT (para contexto e classificação refinada)
             try {
                 console.log('🔬 Consultando backend...');
                 const originalFile = document.getElementById('fileInput').files[0];
@@ -265,7 +265,7 @@ class AIImageAnalyzer {
                 console.log('⚠️ Backend não disponível para classificação');
             }
             
-            // 📱 Método 3: MobileNet filtrado (backup inteligente)
+            // Método 3: MobileNet filtrado (backup inteligente)
             if (this.models.mobilenet) {
                 console.log('📱 Analisando com MobileNet...');
                 const mobilenetPredictions = await this.models.mobilenet.classify(imgElement);
@@ -416,7 +416,7 @@ class AIImageAnalyzer {
                 // Depois por confiança (maior = melhor)
                 return b.confidence - a.confidence;
             })
-            .slice(0, 4); // Máximo 4 resultados
+            .slice(0, 4);
     }
 
     renderSmartClassification(data) {
@@ -509,19 +509,19 @@ class AIImageAnalyzer {
 
     getSourceColor(source) {
         const colors = {
-            'COCO-SSD': '#28a745',       // Verde (detecção precisa)
-            'ViT-Backend': '#007bff',    // Azul (análise contextual)
-            'BLIP-Semantic': '#17a2b8',  // Ciano (descrição semântica)
-            'MobileNet': '#6c757d'       // Cinza (backup)
+            'COCO-SSD': '#28a745',       
+            'ViT-Backend': '#007bff',    
+            'BLIP-Semantic': '#17a2b8',  
+            'MobileNet': '#6c757d'      
         };
         return colors[source] || '#6c757d';
     }
 
     getConfidenceColor(confidence) {
-        if (confidence > 0.7) return '#28a745';  // Verde
-        if (confidence > 0.5) return '#ffc107';  // Amarelo
-        if (confidence > 0.3) return '#fd7e14';  // Laranja
-        return '#dc3545';                        // Vermelho
+        if (confidence > 0.7) return '#28a745';  
+        if (confidence > 0.5) return '#ffc107'; 
+        if (confidence > 0.3) return '#fd7e14';  
+        return '#dc3545';                        
     }
 
     async classifyWithMobileNet(imgElement) {
@@ -582,7 +582,7 @@ class AIImageAnalyzer {
             console.log('📁 Arquivo original:', originalFile.name, originalFile.type, originalFile.size);
             
             const formData = new FormData();
-            formData.append('image', originalFile); // Usar arquivo original
+            formData.append('image', originalFile); 
             
             console.log('📤 Enviando para:', `${this.backendUrl}/api/analyze`);
             
@@ -707,7 +707,7 @@ class AIImageAnalyzer {
             </div>`;
         }
         
-        // Sentimento (formatado corretamente)
+        // Sentimento 
         if (data.sentiment) {
             if (typeof data.sentiment === 'object') {
                 const sentiment = data.sentiment.sentiment || 'N/A';
@@ -761,7 +761,7 @@ class AIImageAnalyzer {
             }
         }
         
-        // Qualidade (formatada de forma legível)
+        // Qualidade 
         if (data.quality && typeof data.quality === 'object' && !data.quality.error) {
             html += `<div class="analysis-item">
                 <strong>📊 Qualidade da Imagem:</strong>
