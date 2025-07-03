@@ -1,0 +1,22 @@
+{
+  "name": "ai-image-analyzer-frontend",
+  "version": "1.0.0",
+  "description": "Frontend para análise de imagens com IA",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server --port=3000",
+    "dev": "live-server --port=3000 --open=/index.html"
+  },
+  "dependencies": {
+    "@tensorflow/tfjs": "^4.17.0",
+    "@tensorflow-models/mobilenet": "^2.1.0",
+    "@tensorflow-models/coco-ssd": "^2.2.2",
+    "colorthief": "^2.4.0"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "keywords": ["ai", "image-analysis", "tensorflow", "computer-vision"],
+  "author": "AI Image Analyzer",
+  "license": "MIT"
+}

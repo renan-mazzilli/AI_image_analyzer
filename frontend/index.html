@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 Analisador de Imagens com IA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔍 Analisador de Imagens com IA</h1>
+            <p>Upload de imagens para análise com múltiplos modelos de IA</p>
+        </header>
+
+        <div class="upload-section">
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">📸</div>
+                <h3>Faça upload das suas imagens</h3>
+                <p>Arraste e solte ou clique para selecionar</p>
+                <input type="file" id="fileInput" multiple accept="image/*" style="display: none;">
+                <button class="upload-btn" onclick="document.getElementById('fileInput').click()">
+                    Selecionar Imagens
+                </button>
+            </div>
+            
+            <div class="model-selection">
+                <h4>🤖 Modelos de IA Disponíveis:</h4>
+                <div class="model-options">
+                    <label>
+                        <input type="checkbox" id="smartClassification" checked>
+                        <span>🧠 <strong>Classificação Inteligente</strong></span>
+                    </label>
+                    <label>
+                        <input type="checkbox" id="cocoSsd" checked>
+                        <span>🎯 Detecção de Objetos</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" id="backendAI" checked>
+                        <span>🧠 Análise Avançada (Backend)</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" id="colorAnalysis" checked>
+                        <span>🎨 Análise de Cores</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="loading-indicator" id="loadingIndicator" style="display: none;">
+            <div class="spinner"></div>
+            <p>Carregando modelos de IA...</p>
+        </div>
+
+        <div id="results" class="results-container"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.17.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.0/dist/mobilenet.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.2/dist/coco-ssd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
