@@ -164,4 +164,4 @@ Para dúvidas sobre execução, consulte este README ou verifique:
 
 ## Desenvolvido Por
 - [Renan Mazzilli Dias](https://github.com/renan-mazzilli)
-- [Felipe Bayona]()
+- [Felipe Bayona](https://github.com/Felipe-Bayona)
